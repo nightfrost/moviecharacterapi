@@ -1,4 +1,4 @@
 package com.example.moviecharacterapi.models;
 
-public class Director {
+public class Character {
 }
