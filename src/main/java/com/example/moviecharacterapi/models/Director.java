@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
+@Table(name = "directors")
 public class Director {
 
     @Id
@@ -13,11 +14,6 @@ public class Director {
     @Column(name = "name")
     private String name;
 
-    @ManyToMany
-    @JoinTable(
-            name="movie_has_director",
-            joinColumns={@JoinColumn(name="directorId")},
-            inverseJoinColumns={@JoinColumn(name="movieId")}
-    )
+    @OneToMany(mappedBy = "director")
     private Set<Movie> movies;
 }

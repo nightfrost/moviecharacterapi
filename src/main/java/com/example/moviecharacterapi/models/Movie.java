@@ -25,6 +25,13 @@ public class Movie {
     @ManyToMany(mappedBy = "movies")
     public Set<Genre> genres;
 
+    @ManyToOne
+    @JoinColumn(name = "directorId")
+    public Director director;
+
+    @ManyToOne
+    @JoinColumn(name = "franchiseId")
+    public Franchise franchise;
 
     public long getMovieId() {
         return movieId;

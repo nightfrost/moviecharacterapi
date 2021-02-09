@@ -3,6 +3,7 @@ package com.example.moviecharacterapi.models;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "characters")
 public class Character {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
