@@ -16,4 +16,28 @@ public class Director {
 
     @OneToMany(mappedBy = "director")
     private Set<Movie> movies;
+
+    public long getDirectorId() {
+        return directorId;
+    }
+
+    public void setDirectorId(long directorId) {
+        this.directorId = directorId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Set<Movie> getMovies() {
+        return movies;
+    }
+
+    public void setMovies(Set<Movie> movies) {
+        this.movies = movies;
+    }
 }
