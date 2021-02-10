@@ -79,4 +79,12 @@ public class Character {
     public void setPicture(String picture) {
         this.picture = picture;
     }
+
+    public Set<Movie> getMovies() {
+        return movies;
+    }
+
+    public void setMovies(Set<Movie> movies) {
+        this.movies = movies;
+    }
 }

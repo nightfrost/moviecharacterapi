@@ -22,6 +22,9 @@ public class Movie {
     @Column(name = "trailer")
     private String trailer;
 
+    @ManyToMany(mappedBy = "characters")
+    public Set<Character> characters;
+
     @ManyToMany(mappedBy = "movies")
     public Set<Genre> genres;
 
@@ -71,5 +74,37 @@ public class Movie {
 
     public void setTrailer(String trailer) {
         this.trailer = trailer;
+    }
+
+    public Set<Character> getCharacters() {
+        return characters;
+    }
+
+    public void setCharacters(Set<Character> characters) {
+        this.characters = characters;
+    }
+
+    public Set<Genre> getGenres() {
+        return genres;
+    }
+
+    public void setGenres(Set<Genre> genres) {
+        this.genres = genres;
+    }
+
+    public Director getDirector() {
+        return director;
+    }
+
+    public void setDirector(Director director) {
+        this.director = director;
+    }
+
+    public Franchise getFranchise() {
+        return franchise;
+    }
+
+    public void setFranchise(Franchise franchise) {
+        this.franchise = franchise;
     }
 }
