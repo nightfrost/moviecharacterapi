@@ -18,6 +18,7 @@ public class MovieController {
     private final MovieRepository movieRepository;
 
     public MovieController(MovieRepository movieRepository) {
+
         this.movieRepository = movieRepository;
     }
 
