@@ -1,6 +1,7 @@
 package com.example.moviecharacterapi.controllers;
 
 import com.example.moviecharacterapi.models.Character;
+import com.example.moviecharacterapi.models.Genre;
 import com.example.moviecharacterapi.models.Movie;
 import com.example.moviecharacterapi.repositories.MovieRepository;
 import org.springframework.http.HttpStatus;
@@ -68,17 +69,33 @@ public class MovieController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Movie> deleteMovie(long id) {
-        Movie returnMovie = null;
         HttpStatus status = HttpStatus.NO_CONTENT;
         if (movieRepository.existsById(id)) {
             Movie movie = movieRepository.findById(id).get();
+
             Set<Character> characters = movie.getCharacters();
             for (Character character : characters) {
                 character.getMovies().remove(movie);
             }
 
+            Set<Genre> genres = movie.getGenres();
+            for (Genre genre : genres) {
+                genre.getMovies().remove(movie);
+            }
+
+            if (movie.getDirector() != null) {
+                movie.getDirector().getMovies().remove(movie);
+            }
+            if (movie.getFranchise() != null) {
+                movie.getFranchise().getMovies().remove(movie);
+            }
+
+            movieRepository.delete(movie);
+            status = HttpStatus.OK;
+            return new ResponseEntity<>(movie, status);
+
         }
-        return new ResponseEntity<>(returnMovie, status);
+        return new ResponseEntity<>(null, status);
     }
 
 
