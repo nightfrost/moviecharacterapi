@@ -68,4 +68,17 @@ public class CharacterController {
         status = HttpStatus.NO_CONTENT;
         return new ResponseEntity<>(returnChar, status);
     }
+
+    //Deletes the character but returns 500 Internal error???
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Character> deleteCharacter(@PathVariable long id) {
+        // checks if it exists
+        if (characterRepository.existsById(id)) {
+            Character character = characterRepository.findById(id).get();
+            characterRepository.delete(character);
+            return new ResponseEntity<>(character, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+    }
+
 }
