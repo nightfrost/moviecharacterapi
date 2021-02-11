@@ -14,6 +14,7 @@ import java.util.List;
 public class DirectorController {
 
     private final DirectorRepository directorRepository;
+
     public DirectorController(DirectorRepository directorRepository) {
         this.directorRepository = directorRepository;
     }
@@ -25,12 +26,12 @@ public class DirectorController {
         if (directors.size() == 0) {
             status = HttpStatus.NO_CONTENT;
         } else {
-            status =HttpStatus.OK;
+            status = HttpStatus.OK;
         }
         return new ResponseEntity<>(directors, status);
     }
 
-    @GetMapping("/{id")
+    @GetMapping("/{id}")
     public ResponseEntity<Director> getDirector(@PathVariable long id) {
         HttpStatus status = HttpStatus.NOT_FOUND;
         boolean exists = directorRepository.existsById(id);
@@ -63,14 +64,14 @@ public class DirectorController {
     }
 
     @DeleteMapping("/{id}")
-        public ResponseEntity<Director> deleteDirector(@PathVariable long id) {
-            // checks if it exists
-            if (directorRepository.existsById(id)) {
-                Director director = directorRepository.findById(id).get();
-                directorRepository.delete(director);
-                return new ResponseEntity<>(director, HttpStatus.OK);
-            }
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+    public ResponseEntity<Director> deleteDirector(@PathVariable long id) {
+        // checks if it exists
+        if (directorRepository.existsById(id)) {
+            Director director = directorRepository.findById(id).get();
+            directorRepository.delete(director);
+            return new ResponseEntity<>(director, HttpStatus.OK);
         }
-
+        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
+
+}

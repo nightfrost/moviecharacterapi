@@ -26,9 +26,9 @@ public class Character {
     private String picture;
 
     @ManyToMany
-    @JoinTable(name = "movie_Has_Role",
-            joinColumns = {@JoinColumn(name = "characterId")},
-            inverseJoinColumns = {@JoinColumn(name = "movieId")}
+    @JoinTable(name = "movie_has_character",
+            joinColumns = {@JoinColumn(name = "character_id")},
+            inverseJoinColumns = {@JoinColumn(name = "movie_id")}
     )
     private Set<Movie> movies;
 

@@ -27,18 +27,26 @@ public class Movie {
     @Column(name = "trailer")
     private String trailer;
 
-    @ManyToMany(mappedBy = "movies")
+    @ManyToMany()
+    @JoinTable(name = "movie_has_character",
+            joinColumns = {@JoinColumn(name = "movie_id")},
+            inverseJoinColumns = {@JoinColumn(name = "character_id")}
+    )
     public Set<Character> characters;
 
-    @ManyToMany(mappedBy = "movies")
+    @ManyToMany()
+    @JoinTable(name = "movie_has_genre",
+            joinColumns = {@JoinColumn(name = "movie_id")},
+            inverseJoinColumns = {@JoinColumn(name = "genre_id")}
+    )
     public Set<Genre> genres;
 
     @ManyToOne
-    @JoinColumn(name = "directorId")
+    @JoinColumn(name = "director_id")
     public Director director;
 
     @ManyToOne
-    @JoinColumn(name = "franchiseId")
+    @JoinColumn(name = "franchise_id")
     public Franchise franchise;
 
     @JsonGetter("characters")
@@ -51,7 +59,7 @@ public class Movie {
     @JsonGetter("genres")
     public Set<String> getJsonGenres() {
         if (genres != null)
-            return genres.stream().map(genre -> "/api/v1/characters/" + genre.getGenreId()).collect(Collectors.toSet());
+            return genres.stream().map(genre -> "/api/v1/genres/" + genre.getGenreId()).collect(Collectors.toSet());
         return null;
     }
 
@@ -65,7 +73,7 @@ public class Movie {
     @JsonGetter("director")
     public String getJsonDirector() {
         if (director != null)
-            return "/api/v1/franchises/" + director.getDirectorId();
+            return "/api/v1/directors/" + director.getDirectorId();
         return null;
     }
 

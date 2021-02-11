@@ -10,15 +10,14 @@ public class Genre {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long genreId;
 
-    @Column(name="type")
+    @Column(name = "type")
     private String type;
 
     @ManyToMany
-    @JoinTable(name = "movie_Has_Genre",
-            joinColumns = {@JoinColumn(name = "genreId")},
-            inverseJoinColumns = {@JoinColumn(name = "movieId")}
+    @JoinTable(name = "movie_has_genre",
+            joinColumns = {@JoinColumn(name = "genre_id")},
+            inverseJoinColumns = {@JoinColumn(name = "movie_id")}
     )
-
     public Set<Movie> movies;
 
 
