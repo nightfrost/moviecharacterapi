@@ -1,12 +1,15 @@
 package com.example.moviecharacterapi.controllers;
 
 import com.example.moviecharacterapi.models.Character;
+import com.example.moviecharacterapi.models.Genre;
+import com.example.moviecharacterapi.models.Movie;
 import com.example.moviecharacterapi.repositories.CharacterRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/v1/characters")
@@ -31,7 +34,7 @@ public class CharacterController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Character> getLibrary(@PathVariable Long id){
+    public ResponseEntity<Character> getCharacter(@PathVariable Long id){
         Character returnChar = new Character();
         HttpStatus status;
         // We first check if the Library exists, this saves some computing time.
@@ -45,14 +48,14 @@ public class CharacterController {
     }
 
     @PostMapping
-    public ResponseEntity<Character> addLibrary(@RequestBody Character character){
+    public ResponseEntity<Character> addCharacter(@RequestBody Character character){
         Character returnChar = characterRepository.save(character);
         HttpStatus status = HttpStatus.CREATED;
         return new ResponseEntity<>(returnChar, status);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Character> updateLibrary(@PathVariable Long id, @RequestBody Character character){
+    public ResponseEntity<Character> updateCharacter(@PathVariable Long id, @RequestBody Character character){
         Character returnChar = new Character();
         HttpStatus status;
         /*
