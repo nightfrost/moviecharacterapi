@@ -25,7 +25,7 @@ public class Movie {
     @Column(name = "trailer")
     private String trailer;
 
-    @ManyToMany(mappedBy = "characters")
+    @ManyToMany(mappedBy = "movies")
     public Set<Character> characters;
 
     @ManyToMany(mappedBy = "movies")
