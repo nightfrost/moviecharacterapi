@@ -3,7 +3,7 @@
 
 
 # Postman Collection Test
-* Link to postman
+* Found in Resources
 
 # Heroku app from git
 * https://blooming-badlands-15165.herokuapp.com/
