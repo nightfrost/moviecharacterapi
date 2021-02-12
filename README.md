@@ -6,7 +6,7 @@
 * Found in Resources
 
 # Heroku app from git
-* [link] https://blooming-badlands-15165.herokuapp.com/
+* [link](https://blooming-badlands-15165.herokuapp.com/)
 
 # Api calls : 
 # # Director
