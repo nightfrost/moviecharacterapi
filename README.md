@@ -1,6 +1,5 @@
 # Movie character API 
 ### Movie character is a restful application. The application is constructed in Spring and uses Spring data and Hibernate to generate the database. The purpose of this API is to provide a datastore to store and manipulate movies. The application uses postgreSQL as the main database, to store and manipulate data about movies, characters and franchises. Furthermore, full CRUD operations are implemented, check the API calls section.
-### The code is well organized and commented to explain the functionality as well as api documentation is provided using swagger library. In addition, both the database and the application are deployed and running on Heroku.
 
 
 # Postman Collection Test
@@ -35,11 +34,11 @@
 * Update Movie {id, movie object}
 * Delete Movie {id}
 # # Character
-* Select All Roles
-* Select Role {id}
-* Insert Role {role Object}
-* Update Role {id, role object}
-* Delete Role {id}
+* Select All Characters
+* Select Character {id}
+* Insert Character {role Object}
+* Update Character {id, role object}
+* Delete Character {id}
 
 # Group
 * Dan
