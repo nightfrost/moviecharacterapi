@@ -1,12 +1,14 @@
 package com.example.moviecharacterapi.controllers;
 
 import com.example.moviecharacterapi.models.Genre;
+import com.example.moviecharacterapi.models.Movie;
 import com.example.moviecharacterapi.repositories.GenreRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("api/v1/genres")
@@ -64,12 +66,15 @@ public class GenreController {
         return new ResponseEntity<>(returnGenre, status);
     }
 
-    //Deletes the character but returns 500 Internal error???
     @DeleteMapping("/{id}")
     public ResponseEntity<Genre> deleteGenre(@PathVariable Long id) {
         // checks if it exists
         if (genreRepository.existsById(id)) {
             Genre genre = genreRepository.findById(id).get();
+            Set<Movie> movies = genre.getMovies();
+            for (Movie movie : movies) {
+                movie.setFranchise(null);
+            }
             genreRepository.delete(genre);
             return new ResponseEntity<>(genre, HttpStatus.OK);
         }

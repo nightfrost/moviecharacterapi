@@ -2,12 +2,14 @@ package com.example.moviecharacterapi.controllers;
 
 
 import com.example.moviecharacterapi.models.Director;
+import com.example.moviecharacterapi.models.Movie;
 import com.example.moviecharacterapi.repositories.DirectorRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("api/v1/directors")
@@ -72,6 +74,10 @@ public class DirectorController {
         // checks if it exists
         if (directorRepository.existsById(id)) {
             Director director = directorRepository.findById(id).get();
+            Set<Movie> movies = director.getMovies();
+            for (Movie movie : movies) {
+                movie.setDirector(null);
+            }
             directorRepository.delete(director);
             return new ResponseEntity<>(director, HttpStatus.OK);
         }

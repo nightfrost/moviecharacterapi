@@ -78,6 +78,11 @@ public class CharacterController {
         // checks if it exists
         if (characterRepository.existsById(id)) {
             Character character = characterRepository.findById(id).get();
+
+            Set<Movie> movies = character.getMovies();
+            for (Movie movie : movies) {
+                movie.getCharacters().remove(character);
+            }
             characterRepository.delete(character);
             return new ResponseEntity<>(character, HttpStatus.OK);
         }
