@@ -6,7 +6,7 @@
 * Link to postman
 
 # Heroku app from git
-* Link to heroku
+* https://blooming-badlands-15165.herokuapp.com/
 
 # Api calls : 
 # # Director
