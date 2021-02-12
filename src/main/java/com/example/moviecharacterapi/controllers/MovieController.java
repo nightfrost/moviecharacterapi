@@ -49,7 +49,7 @@ public class MovieController {
     }
 
     @PostMapping
-    public ResponseEntity<Movie> addNewMovie(@RequestBody Movie movie) {
+    public ResponseEntity<Movie> addMovie(@RequestBody Movie movie) {
         HttpStatus status = HttpStatus.CREATED;
         Movie returnMovie = movieRepository.save(movie);
         return new ResponseEntity<>(returnMovie, status);
@@ -68,11 +68,10 @@ public class MovieController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Movie> deleteMovie(long id) {
+    public ResponseEntity<Movie> deleteMovie(@PathVariable long id) {
         HttpStatus status = HttpStatus.NO_CONTENT;
         if (movieRepository.existsById(id)) {
             Movie movie = movieRepository.findById(id).get();
-
             Set<Character> characters = movie.getCharacters();
             for (Character character : characters) {
                 character.getMovies().remove(movie);

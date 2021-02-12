@@ -45,16 +45,20 @@ public class DirectorController {
     }
 
     @PostMapping
-    public ResponseEntity<Director> addNewDirector(@RequestBody Director director) {
+    public ResponseEntity<Director> addDirector(@RequestBody Director director) {
         HttpStatus status = HttpStatus.CREATED;
         Director returnDirector = directorRepository.save(director);
         return new ResponseEntity<>(returnDirector, status);
     }
 
-    @PutMapping
-    public ResponseEntity<Director> updateDirector(@RequestBody Director director) {
+    @PutMapping("/{id}")
+    public ResponseEntity<Director> updateDirector(@PathVariable Long id, @RequestBody Director director) {
         HttpStatus status = HttpStatus.NO_CONTENT;
         Director returnDirector = null;
+        if (!id.equals(director.getDirectorId())) {
+            status = HttpStatus.BAD_REQUEST;
+            return new ResponseEntity<>(returnDirector, status);
+        }
         if (directorRepository.existsById(director.getDirectorId())) {
             returnDirector = directorRepository.save(director);
         } else {

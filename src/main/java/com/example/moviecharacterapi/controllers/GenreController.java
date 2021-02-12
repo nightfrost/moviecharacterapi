@@ -31,11 +31,11 @@ public class GenreController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Genre> getLibrary(@PathVariable Long id){
+    public ResponseEntity<Genre> getGenre(@PathVariable Long id) {
         Genre genre = new Genre();
         HttpStatus status;
         // We first check if the Library exists, this saves some computing time.
-        if(genreRepository.existsById(id)){
+        if (genreRepository.existsById(id)) {
             status = HttpStatus.OK;
             genre = genreRepository.findById(id).get();
         } else {
@@ -45,19 +45,19 @@ public class GenreController {
     }
 
     @PostMapping
-    public ResponseEntity<Genre> addLibrary(@RequestBody Genre genre){
+    public ResponseEntity<Genre> addGenre(@RequestBody Genre genre) {
         Genre returnGenre = genreRepository.save(genre);
         HttpStatus status = HttpStatus.CREATED;
         return new ResponseEntity<>(returnGenre, status);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Genre> updateLibrary(@PathVariable Long id, @RequestBody Genre genre){
+    public ResponseEntity<Genre> updateGenre(@PathVariable Long id, @RequestBody Genre genre) {
         Genre returnGenre = new Genre();
         HttpStatus status;
-        if(!id.equals(genre.getGenreId())){
+        if (!id.equals(genre.getGenreId())) {
             status = HttpStatus.BAD_REQUEST;
-            return new ResponseEntity<>(returnGenre,status);
+            return new ResponseEntity<>(returnGenre, status);
         }
         returnGenre = genreRepository.save(genre);
         status = HttpStatus.NO_CONTENT;

@@ -1,7 +1,10 @@
 package com.example.moviecharacterapi.models;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+
 import javax.persistence.*;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "genres")
@@ -19,6 +22,13 @@ public class Genre {
             inverseJoinColumns = {@JoinColumn(name = "movie_id")}
     )
     public Set<Movie> movies;
+
+    @JsonGetter("movies")
+    public Set<String> getJsonMovies() {
+        if (movies != null)
+            return movies.stream().map(movie -> "/api/v1/movies/" + movie.getMovieId()).collect(Collectors.toSet());
+        return null;
+    }
 
 
     public long getGenreId() {

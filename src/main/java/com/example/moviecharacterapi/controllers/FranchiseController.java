@@ -31,11 +31,11 @@ public class FranchiseController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Franchise> getLibrary(@PathVariable Long id){
+    public ResponseEntity<Franchise> getFranchise(@PathVariable Long id) {
         Franchise returnFranchise = new Franchise();
         HttpStatus status;
         // We first check if the Library exists, this saves some computing time.
-        if(franchiseRepository.existsById(id)){
+        if (franchiseRepository.existsById(id)) {
             status = HttpStatus.OK;
             returnFranchise = franchiseRepository.findById(id).get();
         } else {
@@ -45,19 +45,19 @@ public class FranchiseController {
     }
 
     @PostMapping
-    public ResponseEntity<Franchise> addLibrary(@RequestBody Franchise franchise){
+    public ResponseEntity<Franchise> addFranchise(@RequestBody Franchise franchise) {
         Franchise returnFranchise = franchiseRepository.save(franchise);
         HttpStatus status = HttpStatus.CREATED;
         return new ResponseEntity<>(returnFranchise, status);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Franchise> updateLibrary(@PathVariable Long id, @RequestBody Franchise franchise){
+    public ResponseEntity<Franchise> updateFranchise(@PathVariable Long id, @RequestBody Franchise franchise) {
         Franchise returnFranchise = new Franchise();
         HttpStatus status;
-        if(!id.equals(franchise.getFranchiseId())){
+        if (!id.equals(franchise.getFranchiseId())) {
             status = HttpStatus.BAD_REQUEST;
-            return new ResponseEntity<>(returnFranchise,status);
+            return new ResponseEntity<>(returnFranchise, status);
         }
         returnFranchise = franchiseRepository.save(franchise);
         status = HttpStatus.NO_CONTENT;
