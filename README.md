@@ -6,7 +6,7 @@
 * Found in Resources
 
 # Heroku app from git
-* https://blooming-badlands-15165.herokuapp.com/
+* [link] https://blooming-badlands-15165.herokuapp.com/
 
 # Api calls : 
 # # Director
@@ -39,6 +39,7 @@
 * Insert Character {role Object}
 * Update Character {id, role object}
 * Delete Character {id}
+
 
 # Group
 * Dan
