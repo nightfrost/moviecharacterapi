@@ -34,11 +34,11 @@ public class CharacterController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Character> getCharacter(@PathVariable Long id){
+    public ResponseEntity<Character> getCharacter(@PathVariable Long id) {
         Character returnChar = new Character();
         HttpStatus status;
         // We first check if the Library exists, this saves some computing time.
-        if(characterRepository.existsById(id)){
+        if (characterRepository.existsById(id)) {
             status = HttpStatus.OK;
             returnChar = characterRepository.findById(id).get();
         } else {
@@ -48,14 +48,14 @@ public class CharacterController {
     }
 
     @PostMapping
-    public ResponseEntity<Character> addCharacter(@RequestBody Character character){
+    public ResponseEntity<Character> addCharacter(@RequestBody Character character) {
         Character returnChar = characterRepository.save(character);
         HttpStatus status = HttpStatus.CREATED;
         return new ResponseEntity<>(returnChar, status);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Character> updateCharacter(@PathVariable Long id, @RequestBody Character character){
+    public ResponseEntity<Character> updateCharacter(@PathVariable Long id, @RequestBody Character character) {
         Character returnChar = new Character();
         HttpStatus status;
         /*
@@ -63,18 +63,18 @@ public class CharacterController {
          This is to ensure some level of security, making sure someone
          hasn't done some malicious stuff to our body.
         */
-        if(!id.equals(character.getCharacterId())){
+        if (!id.equals(character.getCharacterId())) {
             status = HttpStatus.BAD_REQUEST;
-            return new ResponseEntity<>(returnChar,status);
+            return new ResponseEntity<>(returnChar, status);
         }
         returnChar = characterRepository.save(character);
         status = HttpStatus.NO_CONTENT;
         return new ResponseEntity<>(returnChar, status);
     }
 
-    //Deletes the character but returns 500 Internal error???
+    //Deletes the character
     @DeleteMapping("/{id}")
-    public ResponseEntity<Character> deleteCharacter(@PathVariable long id) {
+    public ResponseEntity<Character> deleteCharacter(@PathVariable Long id) {
         // checks if it exists
         if (characterRepository.existsById(id)) {
             Character character = characterRepository.findById(id).get();

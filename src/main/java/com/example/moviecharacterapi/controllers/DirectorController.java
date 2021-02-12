@@ -32,7 +32,7 @@ public class DirectorController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Director> getDirector(@PathVariable long id) {
+    public ResponseEntity<Director> getDirector(@PathVariable Long id) {
         HttpStatus status = HttpStatus.NOT_FOUND;
         boolean exists = directorRepository.existsById(id);
         Director returnDirector = null;
@@ -68,7 +68,7 @@ public class DirectorController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Director> deleteDirector(@PathVariable long id) {
+    public ResponseEntity<Director> deleteDirector(@PathVariable Long id) {
         // checks if it exists
         if (directorRepository.existsById(id)) {
             Director director = directorRepository.findById(id).get();

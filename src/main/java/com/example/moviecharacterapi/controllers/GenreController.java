@@ -66,7 +66,7 @@ public class GenreController {
 
     //Deletes the character but returns 500 Internal error???
     @DeleteMapping("/{id}")
-    public ResponseEntity<Genre> deleteGenre(@PathVariable long id) {
+    public ResponseEntity<Genre> deleteGenre(@PathVariable Long id) {
         // checks if it exists
         if (genreRepository.existsById(id)) {
             Genre genre = genreRepository.findById(id).get();

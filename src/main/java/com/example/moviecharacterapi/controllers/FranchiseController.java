@@ -66,7 +66,7 @@ public class FranchiseController {
 
     //Deletes the character but returns 500 Internal error???
     @DeleteMapping("/{id}")
-    public ResponseEntity<Franchise> deleteFranchise(@PathVariable long id) {
+    public ResponseEntity<Franchise> deleteFranchise(@PathVariable Long id) {
         // checks if it exists
         if (franchiseRepository.existsById(id)) {
             Franchise franchise = franchiseRepository.findById(id).get();

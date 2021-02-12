@@ -36,7 +36,7 @@ public class MovieController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Movie> getMovie(@PathVariable long id) {
+    public ResponseEntity<Movie> getMovie(@PathVariable Long id) {
         HttpStatus status = HttpStatus.NOT_FOUND;
         boolean exists = movieRepository.existsById(id);
         Movie returnMovie = null;
@@ -68,7 +68,7 @@ public class MovieController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Movie> deleteMovie(@PathVariable long id) {
+    public ResponseEntity<Movie> deleteMovie(@PathVariable Long id) {
         HttpStatus status = HttpStatus.NO_CONTENT;
         if (movieRepository.existsById(id)) {
             Movie movie = movieRepository.findById(id).get();
