@@ -48,6 +48,19 @@ public class MovieController {
         return new ResponseEntity<>(null, status);
     }
 
+    @GetMapping("/{id}/characters")
+    public ResponseEntity<Set<Character>> getMovieCharacters(@PathVariable Long id) {
+        HttpStatus status = HttpStatus.NOT_FOUND;
+        boolean exists = movieRepository.existsById(id);
+        if (exists) {
+            Movie movie = movieRepository.findById(id).get();
+            Set<Character> characters = movie.getCharacters();
+            status = HttpStatus.OK;
+            return new ResponseEntity<>(characters, status);
+        }
+        return new ResponseEntity<>(null, status);
+    }
+
     @PostMapping
     public ResponseEntity<Movie> addMovie(@RequestBody Movie movie) {
         HttpStatus status = HttpStatus.CREATED;

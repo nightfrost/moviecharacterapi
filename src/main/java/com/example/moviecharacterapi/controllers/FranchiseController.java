@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -36,7 +37,6 @@ public class FranchiseController {
     public ResponseEntity<Franchise> getFranchise(@PathVariable Long id) {
         Franchise returnFranchise = new Franchise();
         HttpStatus status;
-        // We first check if the Library exists, this saves some computing time.
         if (franchiseRepository.existsById(id)) {
             status = HttpStatus.OK;
             returnFranchise = franchiseRepository.findById(id).get();
@@ -44,6 +44,44 @@ public class FranchiseController {
             status = HttpStatus.NOT_FOUND;
         }
         return new ResponseEntity<>(returnFranchise, status);
+    }
+
+    @GetMapping("/{id}/movies")
+    public ResponseEntity<Set<Movie>> getFranchiseMovies(@PathVariable Long id) {
+        HttpStatus status;
+        Set<Movie> franchiseMovies;
+        if (franchiseRepository.existsById(id)) {
+            status = HttpStatus.OK;
+            Franchise franchise = franchiseRepository.findById(id).get();
+            franchiseMovies = franchise.getMovies();
+        } else {
+            franchiseMovies = null;
+            status = HttpStatus.NOT_FOUND;
+        }
+        return new ResponseEntity<>(franchiseMovies, status);
+    }
+
+    @GetMapping("/{id}/characters")
+    public ResponseEntity<List<Character>> getFranchiseCharacters(@PathVariable Long id) {
+        HttpStatus status;
+        List<Character> franchiseCharacters = new ArrayList<Character>();
+        if (franchiseRepository.existsById(id)) {
+            status = HttpStatus.OK;
+            Franchise franchise = franchiseRepository.findById(id).get();
+            Set<Movie> franchiseMovies = franchise.getMovies();
+            for (Movie movie : franchiseMovies) {
+                Set<Character> movieCharacters = movie.getCharacters();
+                for (Character character : movieCharacters) {
+                    if (!franchiseCharacters.contains(character)) {
+                        franchiseCharacters.add(character);
+                    }
+                }
+            }
+        } else {
+            franchiseCharacters = null;
+            status = HttpStatus.NOT_FOUND;
+        }
+        return new ResponseEntity<>(franchiseCharacters, status);
     }
 
     @PostMapping
