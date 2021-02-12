@@ -3,10 +3,10 @@
 
 
 # Postman Collection Test
-* Found in Resources
+* [Link to postman collection](src/main/resources/MovieAPI.postman_collection.json)
 
 # Heroku app from git
-* [link](https://blooming-badlands-15165.herokuapp.com/)
+* [Link to heroku app](https://blooming-badlands-15165.herokuapp.com/)
 
 # Api calls : 
 # # Director
