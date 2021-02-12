@@ -16,7 +16,7 @@
 * Insert Director {director Object}
 * Update Director {id, directer object}
 * Delete Director {id}
-# # Frachise
+# # Franchise
 * Select All Frachises
 * Select Frachise {id}
 * Insert Frachise {franchise Object}
@@ -34,7 +34,7 @@
 * Insert Movie {movie Object}
 * Update Movie {id, movie object}
 * Delete Movie {id}
-# # Role
+# # Character
 * Select All Roles
 * Select Role {id}
 * Insert Role {role Object}
